@@ -1,0 +1,17 @@
+{
+    "3306": "mysql",
+    "1433": "mssql",
+    "21": "ftp",
+    "22": "ssh",
+    "23": "telnet",
+    "445": "smb",
+    "3389": "rdp",
+    "5900": "vnc",
+    "6379": "redis",
+    "27017": "mongodb",
+    "5432": "postgres",
+    "5984": "couchdb",
+    "11211": "memcached",
+    "9200": "elasticsearch",
+    "1521": "oracle"
+}
