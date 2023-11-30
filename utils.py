@@ -1,6 +1,11 @@
 import json
 import os
+import sys
+from pathlib import Path
 from collections import defaultdict
+
+
+BASE_DIR = Path(__file__).resolve().parent
 
 
 def get_masscan_files(scan_path: str) -> list:
@@ -40,22 +45,32 @@ def get_result_files(folder: str = None):
 
 def load_services() -> dict:
     """Load port and service from json"""
-    with open("services.json", encoding="utf-8") as f:
+    file_path = BASE_DIR / "services.json"
+    if not file_path.exists():
+        print("[!] services.json not found, download it from gitrepo")
+        sys.exit(1)
+    with open(file_path, encoding="utf-8") as f:
         return json.load(f)
 
 
 def load_excluded() -> dict:
     """Load excluded ip:port"""
-    with open("settings.json", encoding="utf-8") as f:
+    file_path = BASE_DIR / "settings.json"
+    if not file_path.exists():
+        with open(file_path, "w", encoding="utf-8") as f:
+            json.dump({"excluded": {}}, f, indent=4)
+        return {}
+    with open(file_path, encoding="utf-8") as f:
         return json.load(f)["excluded"]
 
 
 def save_excluded(excluded: dict):
     """Save excluded ip:port"""
-    with open("settings.json", encoding="utf-8") as f:
+    file_path = BASE_DIR / "settings.json"
+    with open(file_path, encoding="utf-8") as f:
         settings = json.load(f)
     settings["excluded"] = excluded
-    with open("settings.json", "w", encoding="utf-8") as f:
+    with open(file_path, "w", encoding="utf-8") as f:
         json.dump(settings, f, indent=4)
 
 
