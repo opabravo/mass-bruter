@@ -52,7 +52,7 @@ masscan --resume paused.conf | tee -a ./result/masscan/masscan_test.txt
 
 ### 2. Run the script
 
-Load masscan result then bruteforcing:
+Load masscan result then start bruteforcing:
 
 ```bash
 python3 mass_bruteforce.py -q -f ~/masscan_script.txt
